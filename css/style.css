@@ -16,13 +16,14 @@ body{
 
 header{
   background:var(--green);
-  padding:15px;
+  padding:10px 20px;
 }
 
 nav{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  flex-wrap:wrap;
 }
 
 .logo{
@@ -31,46 +32,48 @@ nav{
   font-weight:bold;
 }
 
-nav a{
+nav .nav-links{
+  display:flex;
+  gap:15px;
+}
+
+nav .nav-links a{
   color:white;
   text-decoration:none;
-  margin-left:15px;
 }
 
-.hero{
-  background:var(--yellow);
-  padding:60px 20px;
-  text-align:center;
-}
-
-.section{
-  padding:40px 20px;
-}
-
-.btn{
-  background:var(--green);
+.menu-toggle{
+  display:none;
+  font-size:28px;
   color:white;
-  padding:10px 20px;
-  text-decoration:none;
-  display:inline-block;
-  margin-top:15px;
+  cursor:pointer;
 }
 
-footer{
-  background:var(--green);
-  color:white;
-  text-align:center;
-  padding:15px;
-}
-@media(max-width:768px){
+/* Mobile Styles */
+@media (max-width:768px){
+  nav{
+    flex-direction:column;
+    align-items:flex-start;
+  }
 
-nav{
-flex-direction:column;
-}
+  .nav-links{
+    flex-direction:column;
+    width:100%;
+    display:none;
+  }
 
-nav a{
-display:block;
-margin:10px 0;
+  .nav-links a{
+    padding:10px 0;
+    width:100%;
+  }
+
+  .menu-toggle{
+    display:block;
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
 }
 
 .hero{
