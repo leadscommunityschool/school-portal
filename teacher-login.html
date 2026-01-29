@@ -1,0 +1,43 @@
+<header>
+<nav>
+<div class="logo">Leads Community School</div>
+</nav>
+</header>
+
+<div class="hero">
+<h2>Teacher Login</h2>
+</div>
+
+<div class="section">
+
+<input id="tid" placeholder="Teacher ID"><br><br>
+<input id="tpass" type="password" placeholder="Password"><br><br>
+
+<button onclick="tlogin()">Login</button>
+
+<p id="msg"></p>
+
+</div>
+
+<script>
+function tlogin(){
+
+fetch("YOUR_WEB_APP_URL",{
+method:"POST",
+body:JSON.stringify({
+action:"teacherLogin",
+teacherID:document.getElementById("tid").value,
+password:document.getElementById("tpass").value
+})
+})
+.then(r=>r.json())
+.then(d=>{
+if(d.status=="success"){
+localStorage.setItem("teacherName",d.name);
+window.location="attendance.html";
+}else{
+document.getElementById("msg").innerHTML="Wrong Login";
+}
+});
+}
+</script>
