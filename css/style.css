@@ -78,4 +78,15 @@ padding:40px 10px;
 }
 
 }
+.gallery img{
+width:250px;
+margin:10px;
+border-radius:8px;
+}
+
+.gallery{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+}
 
