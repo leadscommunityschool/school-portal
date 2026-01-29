@@ -52,7 +52,7 @@ form.addEventListener('submit', async (e)=>{
   e.preventDefault();
   const formData = new FormData(form);
   const data = Object.fromEntries(formData.entries());
-  const response = await fetch("https://script.google.com/macros/s/AKfycbzim1Lqmh-rjZuyk2oKat6f0jYl39I7P1_qMSp-Wlm37TYfEiwUWah-6aywStP3VOKr/exec", {
+  const response = await fetch("https://script.google.com/macros/s/AKfycbySVVZ1IHUQATv5MW-OZ8yhJsOl9GsaIOBEy3XWTy8jF2WaMyxtp8wUyMRZaMQkuN8R/exec", {
     method:"POST",
     body: JSON.stringify(data)
   });
