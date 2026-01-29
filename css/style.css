@@ -18,7 +18,11 @@ header{
   background:var(--green);
   padding:10px 20px;
 }
-
+.hero{
+  background: var(--yellow);
+  padding: 40px 10px;
+  text-align: center;
+}
 nav{
   display:flex;
   justify-content:space-between;
