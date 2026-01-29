@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Student Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+<h2>Student Login</h2>
+
+<input id="sid" placeholder="Student ID"><br><br>
+<input id="pass" type="password" placeholder="Password"><br><br>
+
+<button onclick="login()">Login</button>
+
+<p id="msg"></p>
+
+<script>
+function login(){
+
+fetch("https://script.google.com/macros/s/AKfycbwa1GbqsS7cCE5lj0278B9pdGP4M0uI60gnCX2Ok_6qjWkYl7Dfmo6dWGDu8koN-XnRjg/exec",{
+method:"POST",
+body:JSON.stringify({
+action:"studentLogin",
+studentID:document.getElementById("sid").value,
+password:document.getElementById("pass").value
+})
+})
+.then(r=>r.json())
+.then(d=>{
+if(d.status=="success"){
+localStorage.setItem("studentName",d.name);
+localStorage.setItem("studentClass",d.class);
+window.location="student-dashboard.html";
+}else{
+document.getElementById("msg").innerHTML="Wrong Login";
+}
+});
+}
+</script>
+
+</body>
+</html>
