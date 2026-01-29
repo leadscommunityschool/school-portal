@@ -1,0 +1,38 @@
+<h2>Attendance</h2>
+
+Student Name:<br>
+<input id="student"><br><br>
+
+Class:<br>
+<input id="class"><br><br>
+
+<select id="status">
+<option>Present</option>
+<option>Absent</option>
+</select><br><br>
+
+<button onclick="save()">Save Attendance</button>
+
+<p id="msg"></p>
+
+<script>
+function save(){
+
+fetch("https://script.google.com/macros/s/AKfycbxtHN_pBhyFtxSREXzx5pQNJKolMcVNCx-Elg9JjCUuebdKWVxfdiZ_AMN9QbvuIMDyTg/exec",{
+method:"POST",
+body:JSON.stringify({
+action:"attendance",
+student:document.getElementById("student").value,
+class:document.getElementById("class").value,
+status:document.getElementById("status").value,
+teacher:localStorage.getItem("teacherName")
+})
+})
+.then(r=>r.json())
+.then(d=>{
+if(d.status=="saved"){
+document.getElementById("msg").innerHTML="Saved!";
+}
+});
+}
+</script>
