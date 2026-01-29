@@ -1,9 +1,28 @@
-<h2>Welcome</h2>
+<header>
+<nav>
+<div class="logo">Leads Community School</div>
+</nav>
+</header>
+
+<div class="hero">
+<h2>Student Dashboard</h2>
+</div>
+
+<div class="section">
 
 <p>Name: <span id="n"></span></p>
 <p>Class: <span id="c"></span></p>
 
+<button onclick="logout()">Logout</button>
+
+</div>
+
 <script>
 document.getElementById("n").innerHTML=localStorage.getItem("studentName");
 document.getElementById("c").innerHTML=localStorage.getItem("studentClass");
+
+function logout(){
+localStorage.clear();
+window.location="student-login.html";
+}
 </script>
