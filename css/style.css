@@ -63,7 +63,7 @@ nav .nav-links a{
   .nav-links{
     flex-direction:column;
     width:100%;
-    display:none;
+    display:none; /* hide menu by default */
   }
 
   .nav-links a{
@@ -76,7 +76,7 @@ nav .nav-links a{
   }
 
   .nav-links.active{
-    display:flex;
+    display:flex; /* show menu when active */
   }
 
   .hero{
@@ -88,9 +88,11 @@ nav .nav-links a{
     width:100%;
     max-width:250px;
   }
+} /* <-- CLOSE MEDIA QUERY HERE */
 
 .gallery{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
 }
+
