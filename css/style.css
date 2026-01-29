@@ -18,11 +18,7 @@ header{
   background:var(--green);
   padding:10px 20px;
 }
-.hero{
-  background: var(--yellow);
-  padding: 40px 10px;
-  text-align: center;
-}
+
 nav{
   display:flex;
   justify-content:space-between;
@@ -36,12 +32,12 @@ nav{
   font-weight:bold;
 }
 
-nav .nav-links{
+.nav-links{
   display:flex;
   gap:15px;
 }
 
-nav .nav-links a{
+.nav-links a{
   color:white;
   text-decoration:none;
 }
@@ -51,6 +47,12 @@ nav .nav-links a{
   font-size:28px;
   color:white;
   cursor:pointer;
+}
+
+.hero{
+  background:var(--yellow);
+  padding:40px 10px;
+  text-align:center;
 }
 
 /* Mobile Styles */
@@ -63,7 +65,7 @@ nav .nav-links a{
   .nav-links{
     flex-direction:column;
     width:100%;
-    display:none; /* hide menu by default */
+    display:none; /* hide by default */
   }
 
   .nav-links a{
@@ -76,7 +78,7 @@ nav .nav-links a{
   }
 
   .nav-links.active{
-    display:flex; /* show menu when active */
+    display:flex; /* show on click */
   }
 
   .hero{
@@ -88,11 +90,10 @@ nav .nav-links a{
     width:100%;
     max-width:250px;
   }
-} /* <-- CLOSE MEDIA QUERY HERE */
+}
 
 .gallery{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
 }
-
