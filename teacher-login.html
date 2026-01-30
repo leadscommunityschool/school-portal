@@ -1,9 +1,5 @@
-<header>
-<nav>
-<div class="logo">Leads Community School</div>
-</nav>
-</header>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Teacher Login</title>
@@ -11,36 +7,68 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 
-<div class="section">
+<body>
+
+<header>
+<nav>
+<div class="logo">Leads Community School</div>
+</nav>
+</header>
+
+<div class="hero">
+<h2>Teacher Login</h2>
+</div>
+
+<div class="section" style="padding:20px; max-width:400px; margin:auto;">
 
 <input id="tid" placeholder="Teacher ID"><br><br>
 <input id="tpass" type="password" placeholder="Password"><br><br>
 
-<button onclick="alert('clicked')">Login</button>
+<button onclick="tlogin()">Login</button>
 
-<p id="msg"></p>
+<p id="msg" style="color:red;"></p>
 
 </div>
 
 <script>
 function tlogin(){
 
-fetch("https://script.google.com/macros/s/AKfycbwWWltZHAFdt2Y_HTQ5SX91WmQmgOKxwapOS521GbvTQN7z2kIV491L85NLOExaB92ELQ/exec",{
-method:"POST",
-body:JSON.stringify({
-action:"teacherLogin",
-teacherID:document.getElementById("tid").value,
-password:document.getElementById("tpass").value
-})
-})
-.then(r=>r.json())
-.then(d=>{
-if(d.status=="success"){
-localStorage.setItem("teacherName",d.name);
-window.location="attendance.html";
-}else{
-document.getElementById("msg").innerHTML="Wrong Login";
+// Get input values
+let teacherID = document.getElementById("tid").value;
+let password = document.getElementById("tpass").value;
+
+if(teacherID=="" || password==""){
+  document.getElementById("msg").innerHTML = "Please fill all fields";
+  return;
 }
+
+fetch("https://script.google.com/macros/s/AKfycbwWWltZHAFdt2Y_HTQ5SX91WmQmgOKxwapOS521GbvTQN7z2kIV491L85NLOExaB92ELQ/exec",{
+  method:"POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    action:"teacherLogin",
+    teacherID: teacherID,
+    password: password
+  })
+})
+.then(r => r.json())
+.then(d => {
+  if(d.status=="success"){
+    localStorage.setItem("teacherName", d.name);
+    window.location="attendance.html";
+  } else {
+    document.getElementById("msg").innerHTML="Wrong Login";
+  }
+})
+.catch(err => {
+  console.log(err);
+  document.getElementById("msg").innerHTML="Network Error";
 });
+
 }
 </script>
+
+</body>
+</html>
