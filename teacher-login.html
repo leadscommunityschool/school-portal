@@ -6,24 +6,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/style.css">
 <style>
-/* Quick inline style if needed */
+/* Inline styles for quick setup */
+body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    margin: 0;
+}
+header nav {
+    background: #0b5d2a;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+header .logo {
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+}
+.hero {
+    background: #f4c400;
+    padding: 30px 10px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
 .section {
     max-width: 400px;
-    margin: 50px auto;
+    margin: 40px auto;
     padding: 20px;
-    background: #f4f4f4;
+    background: #ffffff;
     border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 .section input {
     width: 100%;
     padding: 10px;
-    margin: 8px 0;
+    margin: 10px 0;
     border-radius: 6px;
     border: 1px solid #ccc;
+    font-size: 16px;
 }
 .section button {
     width: 100%;
     padding: 12px;
+    margin-top: 10px;
     border: none;
     border-radius: 6px;
     background: #0b5d2a;
@@ -31,15 +57,12 @@
     font-size: 16px;
     cursor: pointer;
 }
+.section button:hover {
+    background: #09461f;
+}
 #msg {
     color: red;
     margin-top: 10px;
-}
-.hero {
-    background: #f4c400;
-    padding: 30px 10px;
-    text-align: center;
-    font-size: 20px;
     font-weight: bold;
 }
 </style>
@@ -64,44 +87,44 @@ Teacher Login
 </div>
 
 <script>
-function tlogin() {
-    let teacherID = document.getElementById("tid").value;
-    let password = document.getElementById("tpass").value;
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx9QRMbaTdw-k17G95tVWCb9zmwD1dULncvZ7b0x6-VxuNZ7J-W7plp0SAVPDN7j34pTw/exec";
 
-    if (teacherID === "" || password === "") {
+// Redirect immediately if already logged in
+if(localStorage.getItem("teacherName")){
+    window.location = "attendance.html";
+}
+
+function tlogin() {
+    const teacherID = document.getElementById("tid").value.trim();
+    const password = document.getElementById("tpass").value.trim();
+
+    if(!teacherID || !password){
         document.getElementById("msg").innerHTML = "Please fill all fields";
         return;
     }
 
-    fetch("https://script.google.com/macros/s/AKfycbx9QRMbaTdw-k17G95tVWCb9zmwD1dULncvZ7b0x6-VxuNZ7J-W7plp0SAVPDN7j34pTw/exec", {
+    fetch(WEB_APP_URL, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             action: "teacherLogin",
             teacherID: teacherID,
             password: password
         })
     })
-    .then(r => r.json())
-    .then(d => {
-        if (d.status === "success") {
-            localStorage.setItem("teacherName", d.name);
-            window.location = "attendance.html"; // redirect to attendance page
+    .then(res => res.json())
+    .then(data => {
+        if(data.status === "success"){
+            localStorage.setItem("teacherName", data.name);
+            window.location = "attendance.html";
         } else {
             document.getElementById("msg").innerHTML = "Wrong Login";
         }
     })
     .catch(err => {
-        console.log(err);
+        console.error("Network or script error:", err);
         document.getElementById("msg").innerHTML = "Network Error. Check your Web App deployment.";
     });
-}
-
-// Optional: redirect if already logged in
-if (localStorage.getItem("teacherName")) {
-    window.location = "attendance.html";
 }
 </script>
 
