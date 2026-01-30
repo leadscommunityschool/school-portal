@@ -51,7 +51,7 @@ document.getElementById("tname").innerHTML =
 "Welcome " + localStorage.getItem("teacherName");
 
 // Fetch attendance from Google Sheet
-fetch("https://script.google.com/macros/s/AKfycbxtHN_pBhyFtxSREXzx5pQNJKolMcVNCx-Elg9JjCUuebdKWVxfdiZ_AMN9QbvuIMDyTg/exec?type=attendance")
+fetch("https://script.google.com/macros/s/AKfycbx9MmTwBXtM43RUSmKk7u1ZI2-qkDedGm5DsnvgElp43mH804aGyYwgx6kVTWjkZAJodw/exec")
 .then(r => r.json())
 .then(data => {
 
