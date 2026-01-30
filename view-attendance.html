@@ -1,7 +1,5 @@
-<header>
-<nav>
-<div class="logo">Leads Community School</div>
-</nav>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Attendance Records</title>
@@ -9,7 +7,20 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 
+<body>
+
+<header>
+<nav>
+<div class="logo">Leads Community School</div>
+</nav>
+</header>
+
+<div class="hero">
+<h2>Attendance Records</h2>
+</div>
+
 <div class="section" style="padding:20px;">
+
 <table id="attTable">
 <tr>
 <th>Date</th>
@@ -19,30 +30,33 @@
 <th>Teacher</th>
 </tr>
 </table>
-</div>
 
-<div class="section">
-<table border="1" width="100%" id="attTable">
-<tr>
-<th>Date</th>
-<th>Student</th>
-<th>Class</th>
-<th>Status</th>
-<th>Teacher</th>
-</tr>
-</table>
 </div>
 
 <script>
-// Fetch attendance from Web App
+// Fetch attendance from Google Sheet
 fetch("https://script.google.com/macros/s/AKfycbxtHN_pBhyFtxSREXzx5pQNJKolMcVNCx-Elg9JjCUuebdKWVxfdiZ_AMN9QbvuIMDyTg/exec?type=attendance")
-.then(r=>r.json())
-.then(data=>{
+.then(r => r.json())
+.then(data => {
+
   let table = document.getElementById("attTable");
-  data.forEach(row=>{
+
+  // Skip header row in Sheet
+  for(let i=1;i<data.length;i++){
+    let row = data[i];
     let tr = document.createElement("tr");
-    tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td><td>${row[4]}</td>`;
+    tr.innerHTML = `
+      <td>${row[0]}</td>
+      <td>${row[1]}</td>
+      <td>${row[2]}</td>
+      <td>${row[3]}</td>
+      <td>${row[4]}</td>
+    `;
     table.appendChild(tr);
-  });
+  }
+
 });
 </script>
+
+</body>
+</html>
