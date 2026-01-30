@@ -61,6 +61,11 @@ fetch("https://script.google.com/macros/s/AKfycbxtHN_pBhyFtxSREXzx5pQNJKolMcVNCx
 
 });
 </script>
-
+<script>
+function logout(){
+  localStorage.removeItem("teacherName");
+  window.location="teacher-login.html";
+}
+</script>
 </body>
 </html>
