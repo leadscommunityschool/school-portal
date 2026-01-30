@@ -9,6 +9,13 @@
 
 <body>
 
+<script>
+// Protect page (must be first)
+if(!localStorage.getItem("teacherName")){
+  window.location="teacher-login.html";
+}
+</script>
+
 <header>
 <nav>
 <div class="logo">Leads Community School</div>
@@ -16,11 +23,12 @@
 <button onclick="logout()" style="background:white;color:var(--green);border:none;padding:6px 12px;border-radius:5px;">
 Logout
 </button>
+
 </nav>
 </header>
 
 <div class="hero">
-<h2>Attendance Records</h2>
+<h2 id="tname"></h2>
 </div>
 
 <div class="section" style="padding:20px;">
@@ -36,7 +44,12 @@ Logout
 </table>
 
 </div>
+
 <script>
+// Show teacher name
+document.getElementById("tname").innerHTML =
+"Welcome " + localStorage.getItem("teacherName");
+
 // Fetch attendance from Google Sheet
 fetch("https://script.google.com/macros/s/AKfycbxtHN_pBhyFtxSREXzx5pQNJKolMcVNCx-Elg9JjCUuebdKWVxfdiZ_AMN9QbvuIMDyTg/exec?type=attendance")
 .then(r => r.json())
@@ -44,7 +57,6 @@ fetch("https://script.google.com/macros/s/AKfycbxtHN_pBhyFtxSREXzx5pQNJKolMcVNCx
 
   let table = document.getElementById("attTable");
 
-  // Skip header row in Sheet
   for(let i=1;i<data.length;i++){
     let row = data[i];
     let tr = document.createElement("tr");
@@ -59,17 +71,13 @@ fetch("https://script.google.com/macros/s/AKfycbxtHN_pBhyFtxSREXzx5pQNJKolMcVNCx
   }
 
 });
-</script>
-<script>
+
+// Logout
 function logout(){
   localStorage.removeItem("teacherName");
   window.location="teacher-login.html";
 }
-<script>
-// Protect page
-if(!localStorage.getItem("teacherName")){
-  window.location="teacher-login.html";
-}
 </script>
+
 </body>
 </html>
