@@ -38,6 +38,11 @@ Logout
 </div>
 
 <script>
+// Protect page
+if(!localStorage.getItem("teacherName")){
+  window.location="teacher-login.html";
+}
+</script>
 // Fetch attendance from Google Sheet
 fetch("https://script.google.com/macros/s/AKfycbxtHN_pBhyFtxSREXzx5pQNJKolMcVNCx-Elg9JjCUuebdKWVxfdiZ_AMN9QbvuIMDyTg/exec?type=attendance")
 .then(r => r.json())
