@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <title>Student Login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
+
+<body>
 
 <header>
 <nav>
@@ -19,8 +21,11 @@
 
 <div class="section">
 
-<input id="sid" placeholder="Student ID"><br><br>
-<input id="pass" type="password" placeholder="Password"><br><br>
+<input id="sid" placeholder="Student ID">
+<br><br>
+
+<input id="pass" type="password" placeholder="Password">
+<br><br>
 
 <button onclick="login()">Login</button>
 
@@ -31,12 +36,23 @@
 <script>
 function login(){
 
+let sid = document.getElementById("sid").value;
+let pass = document.getElementById("pass").value;
+
+if(sid=="" || pass==""){
+document.getElementById("msg").innerHTML="Fill all fields";
+return;
+}
+
 fetch("https://script.google.com/macros/s/AKfycbx9YAB-O7R1gauxlCC5KcJWVQI6fvPmfMG9w1NH89himviKvPGk4kgKSWY1p--95J6D/exec",{
 method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
 body:JSON.stringify({
 action:"studentLogin",
-studentID:document.getElementById("sid").value,
-password:document.getElementById("pass").value
+studentID:sid,
+password:pass
 })
 })
 .then(r=>r.json())
@@ -48,7 +64,12 @@ window.location="student-dashboard.html";
 }else{
 document.getElementById("msg").innerHTML="Wrong Login";
 }
+})
+.catch(err=>{
+document.getElementById("msg").innerHTML="Network error";
+console.log(err);
 });
+
 }
 </script>
 
