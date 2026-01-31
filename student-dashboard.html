@@ -1,28 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Student Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
 <header>
 <nav>
 <div class="logo">Leads Community School</div>
+
+<button onclick="logout()">Logout</button>
 </nav>
 </header>
 
 <div class="hero">
-<h2>Student Dashboard</h2>
+<h2 id="welcome"></h2>
 </div>
 
-<div class="section">
+<div class="section" style="padding:20px;">
 
-<p>Name: <span id="n"></span></p>
-<p>Class: <span id="c"></span></p>
+<h3>Student Information</h3>
 
-<button onclick="logout()">Logout</button>
+<p><b>Name:</b> <span id="sname"></span></p>
+<p><b>Class:</b> <span id="sclass"></span></p>
 
 </div>
 
 <script>
-document.getElementById("n").innerHTML=localStorage.getItem("studentName");
-document.getElementById("c").innerHTML=localStorage.getItem("studentClass");
+// Protect page
+if(!localStorage.getItem("studentName")){
+  window.location="student-login.html";
+}
+
+// Load data
+document.getElementById("sname").innerHTML = localStorage.getItem("studentName");
+document.getElementById("sclass").innerHTML = localStorage.getItem("studentClass");
+document.getElementById("welcome").innerHTML = "Welcome, " + localStorage.getItem("studentName");
 
 function logout(){
-localStorage.clear();
-window.location="student-login.html";
+  localStorage.clear();
+  window.location="student-login.html";
 }
 </script>
+
+</body>
+</html>
